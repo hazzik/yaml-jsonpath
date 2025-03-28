@@ -68,17 +68,17 @@ func newPath(l *lexer) (*Path, error) {
 		case "*":
 			// includes all nodes, not just mapping nodes
 			return new(func(node, root *yaml.Node) iter.Seq[*yaml.Node] {
-				return compose(recurseNodes(fromNode(node)), allChildrenThen(subPath), root)
+				return compose(recurseNode(node), allChildrenThen(subPath), root)
 			}), nil
 
 		case "":
 			return new(func(node, root *yaml.Node) iter.Seq[*yaml.Node] {
-				return compose(recurseNodes(fromNode(node)), subPath, root)
+				return compose(recurseNode(node), subPath, root)
 			}), nil
 
 		default:
 			return new(func(node, root *yaml.Node) iter.Seq[*yaml.Node] {
-				return compose(recurseNodes(fromNode(node)), childThen(childName, subPath), root)
+				return compose(recurseNode(node), childThen(childName, subPath), root)
 			}), nil
 		}
 
@@ -479,17 +479,14 @@ func fromNodes(nodes ...*yaml.Node) iter.Seq[*yaml.Node] {
 	return slices.Values(nodes)
 }
 
-func recurseNodes(seq iter.Seq[*yaml.Node]) iter.Seq[*yaml.Node] {
+func recurseNode(node *yaml.Node) iter.Seq[*yaml.Node] {
 	return func(yield func(*yaml.Node) bool) {
-		for node := range seq {
-			for child := range recurseNodes(fromNodes(node.Content...)) {
-				if !yield(child) {
-					return
-				}
-			}
-			if !yield(node) {
-				return
-			}
+		for _, n := range node.Content {
+			seq := recurseNode(n)
+			seq(yield)
+		}
+		if !yield(node) {
+			return
 		}
 	}
 }
