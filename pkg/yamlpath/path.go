@@ -442,10 +442,8 @@ func filterThen(filterLexemes []lexeme, p *Path) *Path {
 					its = append(its, compose(fromNode(c), p, root))
 				}
 			}
-		} else {
-			if filter(node, root) {
-				its = append(its, compose(fromNode(node), p, root))
-			}
+		} else if filter(node, root) {
+			its = append(its, compose(fromNode(node), p, root))
 		}
 		return fromIterators(its...)
 	})
