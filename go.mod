@@ -1,4 +1,4 @@
-module github.com/vmware-labs/yaml-jsonpath
+module github.com/hazzik/yaml-jsonpath
 
 go 1.23
 

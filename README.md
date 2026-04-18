@@ -1,9 +1,24 @@
 # YAML JSONPath
 
-[![GoDoc](https://godoc.org/github.com/vmware-labs/yaml-jsonpath?status.svg)](https://godoc.org/github.com/vmware-labs/yaml-jsonpath)
-[![Go Report Card](https://goreportcard.com/badge/vmware-labs/yaml-jsonpath)](https://goreportcard.com/report/vmware-labs/yaml-jsonpath)
+[![GoDoc](https://godoc.org/github.com/hazzik/yaml-jsonpath?status.svg)](https://godoc.org/github.com/hazzik/yaml-jsonpath)
+[![Go Report Card](https://goreportcard.com/badge/github.com/hazzik/yaml-jsonpath)](https://goreportcard.com/report/github.com/hazzik/yaml-jsonpath)
 
 JSONPath implementation for the [YAML node](https://godoc.org/gopkg.in/yaml.v3#Node) API.
+
+## Module Path Migration
+
+This fork published `v0.3.3` as a compatibility release for the original module path
+`github.com/vmware-labs/yaml-jsonpath`.
+
+Starting after that tag, development continues under:
+
+`github.com/hazzik/yaml-jsonpath`
+
+If your project still imports the original module path, you can use this fork via a `replace` directive in your `go.mod`:
+
+```go
+replace github.com/vmware-labs/yaml-jsonpath => github.com/hazzik/yaml-jsonpath v0.3.3
+```
 
 ## Syntax
 

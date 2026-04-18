@@ -10,8 +10,8 @@ import (
 	"bytes"
 	"testing"
 
+	"github.com/hazzik/yaml-jsonpath/pkg/yamlpath"
 	"github.com/stretchr/testify/require"
-	"github.com/vmware-labs/yaml-jsonpath/pkg/yamlpath"
 	"gopkg.in/yaml.v3"
 )
 

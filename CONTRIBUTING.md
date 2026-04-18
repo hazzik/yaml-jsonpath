@@ -17,7 +17,7 @@ This is a rough outline of what a contributor's workflow looks like:
 Example:
 
 ``` shell
-git remote add upstream https://github.com/vmware-labs/yaml-jsonpath.git
+git remote add upstream https://github.com/hazzik/yaml-jsonpath.git
 git checkout -b my-new-feature master
 git commit -a
 git push origin my-new-feature
@@ -25,7 +25,7 @@ git push origin my-new-feature
 
 ### Staying In Sync With Upstream
 
-When your branch gets out of sync with the vmware-labs/master branch, use the following to update:
+When your branch gets out of sync with the hazzik/master branch, use the following to update:
 
 ``` shell
 git checkout my-new-feature

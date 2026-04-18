@@ -11,8 +11,8 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/hazzik/yaml-jsonpath/pkg/yamlpath"
 	"github.com/sergi/go-diff/diffmatchpatch"
-	"github.com/vmware-labs/yaml-jsonpath/pkg/yamlpath"
 	"gopkg.in/yaml.v3"
 )
 

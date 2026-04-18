@@ -6,7 +6,7 @@
 
 package fuzz
 
-import "github.com/vmware-labs/yaml-jsonpath/pkg/yamlpath"
+import "github.com/hazzik/yaml-jsonpath/pkg/yamlpath"
 
 // Fuzz allows go-fuzz to drive the lexer/parser.
 func Fuzz(data []byte) int {
