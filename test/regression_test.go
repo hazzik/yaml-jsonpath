@@ -7,7 +7,7 @@
 package test
 
 import (
-	"io/ioutil"
+	"os"
 	"sort"
 	"testing"
 
@@ -25,7 +25,7 @@ var knownConsensusDisagreements = map[string]struct{}{
 }
 
 func TestRegressionSuite(t *testing.T) {
-	y, err := ioutil.ReadFile("./testdata/regression_suite.yaml")
+	y, err := os.ReadFile("./testdata/regression_suite.yaml")
 	if err != nil {
 		t.Error(err)
 	}

@@ -7,61 +7,61 @@
 package yamlpath
 
 /*
-   filterNode represents a node of a filter expression parse tree. Each node is labelled with a lexeme.
+filterNode represents a node of a filter expression parse tree. Each node is labelled with a lexeme.
 
-   Terminal nodes have one of the following lexemes: root, lexemeFilterAt, lexemeFilterIntegerLiteral,
-   lexemeFilterFloatLiteral, lexemeFilterStringLiteral, lexemeFilterBooleanLiteral.
-   root and lexemeFilterAt nodes also have a slice of lexemes representing the subpath of `$`` or `@``,
-   respectively.
+Terminal nodes have one of the following lexemes: root, lexemeFilterAt, lexemeFilterIntegerLiteral,
+lexemeFilterFloatLiteral, lexemeFilterStringLiteral, lexemeFilterBooleanLiteral.
+root and lexemeFilterAt nodes also have a slice of lexemes representing the subpath of `$` or `@`,
+respectively.
 
-   Non-terminal nodes represent either basic filters (simpler predicates of one or two terminal
-   nodes) or filter expressions (more complex predicates of basic filters). A filter existence expression
-   is represented as a terminal node with lexemeFilterAt or (less commonly) root.
+Non-terminal nodes represent either basic filters (simpler predicates of one or two terminal
+nodes) or filter expressions (more complex predicates of basic filters). A filter existence expression
+is represented as a terminal node with lexemeFilterAt or (less commonly) root.
 
-   The following examples illustrate the approach.
+The following examples illustrate the approach.
 
-   The basic filter `@.child > 3` is represented as the following parse tree (where each node is indicated by
-   its lexeme and `<...>` represents the node's children):
+The basic filter `@.child > 3` is represented as the following parse tree (where each node is indicated by
+its lexeme and `<...>` represents the node's children):
 
-       lexemeFilterGreaterThan<lexemeFilterAt,lexemeFilterIntegerLiteral>
+	lexemeFilterGreaterThan<lexemeFilterAt,lexemeFilterIntegerLiteral>
 
-   or, graphically:
+or, graphically:
 
-               >
-              / \
-       @.child   3
+	        >
+	       / \
+	@.child   3
 
-   The filter expression `@.child > 3 && @.other` is represented as the parse tree:
+The filter expression `@.child > 3 && @.other` is represented as the parse tree:
 
-       lexemeFilterConjunction<lexemeFilterGreaterThan<lexemeFilterAt,lexemeFilterIntegerLiteral>,lexemeFilterAt>
+	lexemeFilterConjunction<lexemeFilterGreaterThan<lexemeFilterAt,lexemeFilterIntegerLiteral>,lexemeFilterAt>
 
-   or, graphically:
+or, graphically:
 
-                               &&
-                             /    \
-                            >      @.other
-                           / \
-                    @.child   3
+	           &&
+	         /    \
+	        >      @.other
+	       / \
+	@.child   3
 
-   The filter expression `(@.child < 5 || @.child > 10) && @.other == 'x'` is represented as the parse tree:
+The filter expression `(@.child < 5 || @.child > 10) && @.other == 'x'` is represented as the parse tree:
 
-       lexemeFilterConjunction<lexemeFilterDisjunction<lexemeFilterLessThan<lexemeFilterAt,lexemeFilterIntegerLiteral>,
-                                                       lexemeFilterGreaterThan<lexemeFilterAt,lexemeFilterIntegerLiteral>
-                                                      >,
-                               lexemeFilterEquality<lexemeFilterAt,lexemeFilterStringLiteral>
-                              >
+	lexemeFilterConjunction<lexemeFilterDisjunction<lexemeFilterLessThan<lexemeFilterAt,lexemeFilterIntegerLiteral>,
+	                                                lexemeFilterGreaterThan<lexemeFilterAt,lexemeFilterIntegerLiteral>
+	                                               >,
+	                        lexemeFilterEquality<lexemeFilterAt,lexemeFilterStringLiteral>
+	                       >
 
-   or, graphically:
+or, graphically:
 
-                               &&
-                        /               \
-                      ||                 ==
-                  /        \            /  \
-               <            >    @.other    'x'
-              / \          / \
-       @.child   5  @.child   10
+	                        &&
+	                 /               \
+	               ||                 ==
+	           /        \            /  \
+	        <            >    @.other    'x'
+	       / \          / \
+	@.child   5  @.child   10
 
-   Note that brackets do not appear in the parse tree.
+Note that brackets do not appear in the parse tree.
 */
 type filterNode struct {
 	lexeme   lexeme
