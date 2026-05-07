@@ -2,7 +2,7 @@ module github.com/hazzik/yaml-jsonpath
 
 go 1.23
 
-toolchain go1.24.0
+toolchain go1.26.3
 
 require (
 	github.com/sergi/go-diff v1.4.0
